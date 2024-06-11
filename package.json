@@ -1,0 +1,19 @@
+{
+  "name": "vanbot",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrolicious/i18n": "^0.4.3",
+    "astro": "^4.10.1"
+  },
+  "devDependencies": {
+    "i18next": "^23.11.5"
+  }
+}

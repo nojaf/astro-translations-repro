@@ -1,0 +1,18 @@
+---
+import { getLocale, t } from "i18n:astro"
+
+const locale = getLocale()
+console.log(locale);
+const lang = locale;
+const greeting = t("common:greeting")
+---
+
+<html>
+    <head>
+    </head>
+    <body>
+        <hr>
+        <h1>Yow intl _ {lang} {greeting}</h1>
+        <hr>
+    </body>
+</html>
