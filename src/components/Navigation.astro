@@ -1,0 +1,298 @@
+---
+import headerImage from "../images/header-logo.png";
+import LanguageSwitcher from "../components/LanguageSwitcher.astro";
+---
+
+<nav class="container">
+  <img src={headerImage.src} />
+  <div class="inner-nav">
+    <button role="navigation">
+      <iconify-icon icon="ion:menu-sharp" width="45" height="45"></iconify-icon>
+    </button>
+    <input type="checkbox" name="menu-check" />
+    <ul>
+      <li class="active">
+        <a href="#">Home</a>
+      </li>
+      <li>
+        <a href="#">Assunta</a>
+      </li>
+      <li>
+        <a href="#">Aletta</a>
+      </li>
+      <li>
+        <a href="#">Vanbot</a>
+      </li>
+      <li>
+        <a href="#">Contact</a>
+      </li>
+    </ul>
+  </div>
+  <LanguageSwitcher className="language-switcher" />
+</nav>
+<style>
+  nav {
+    --toggle-icon-size: 45px;
+    --menu-item-height: calc(
+      var(--toggle-icon-size) + var(--spacing-50) + var(--spacing-50)
+    );
+
+    margin-top: var(--spacing-300);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-300);
+
+    > a {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: var(--black-400);
+      font-size: var(--font-300);
+    }
+
+    .inner-nav {
+      display: flex;
+      flex-direction: row-reverse;
+      position: relative;
+
+      & ul {
+        list-style: none;
+        flex-grow: 1;
+        height: var(--menu-item-height);
+        transition: 300ms all;
+
+        & li {
+          display: none;
+          opacity: 0;
+          height: var(--menu-item-height);
+          font-size: var(--font-500);
+          transition: all 200ms;
+
+          &.active {
+            display: block;
+            text-transform: uppercase;
+            font-weight: 600;
+            opacity: 1;
+            height: var(--menu-item-height);
+
+            & a {
+              color: var(--vanbot-500);
+            }
+          }
+
+          &:hover a {
+            color: var(--vanbot-500);
+          }
+
+          & a {
+            text-decoration: none;
+            display: block;
+            height: 100%;
+            align-content: center;
+            color: var(--black-400);
+            transition: all 300ms;
+            position: relative;
+
+            &::after {
+              content: "";
+              position: absolute;
+              bottom: calc(-1 * var(--spacing-50));
+              left: 0;
+              width: 100%;
+              height: 2px;
+              background-color: var(--vanbot-500);
+              transition:
+                opacity 300ms,
+                transform 300ms;
+              opacity: 0;
+              transform: scale(0);
+              transform-origin: center;
+            }
+
+            &:hover::after,
+            &:focus::after {
+              transform: scale(1);
+              opacity: 1;
+            }
+          }
+        }
+      }
+
+      input[type="checkbox"] {
+        position: absolute;
+        right: var(--spacing-50);
+        top: var(--spacing-50);
+        height: var(--toggle-icon-size);
+        width: var(--toggle-icon-size);
+        appearance: none;
+        cursor: pointer;
+      }
+
+      input:checked + ul {
+        height: calc(5 * var(--menu-item-height));
+
+        & li {
+          opacity: 1;
+          display: block;
+          border-bottom: 1px solid var(--vanbot-100);
+          padding-block: var(--spacing-50);
+        }
+      }
+
+      button:has(+ input[type="checkbox"]:hover) {
+        color: var(--vanbot-400);
+        background-color: var(--vanbot-100);
+      }
+
+      & button {
+        border: none;
+        background-color: transparent;
+        color: var(--vanbot-500);
+        transition: all 300ms;
+        height: var(--menu-item-height);
+        padding: var(--spacing-50);
+      }
+    }
+
+    .language-switcher {
+      margin-inline: auto;
+    }
+  }
+
+  @media screen and (min-width: 500px) {
+    nav {
+      gap: var(--spacing-300);
+
+      & img {
+        padding: var(--spacing-100);
+      }
+
+      & .inner-nav {
+        & button {
+          display: none;
+        }
+
+        & ul {
+          display: flex;
+          height: initial;
+          justify-content: center;
+          gap: var(--spacing-500);
+          padding-block: var(--spacing-300);
+
+          & li {
+            display: block;
+            opacity: 1;
+            height: initial;
+
+            & a {
+              &::after {
+                left: 10%;
+                width: 80%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    nav {
+      display: grid;
+      grid-template-rows: auto auto;
+      grid-template-columns: 50% 50%;
+      column-gap: var(--spacing-400);
+
+      & img {
+        grid-column: 1/2;
+        padding: 0;
+      }
+
+      & .inner-nav {
+        grid-row: 1;
+        grid-column: 2/3;
+
+        & ul {
+          gap: var(--spacing-300);
+          padding: 0;
+          align-self: center;
+
+          & li a {
+            font-size: var(--font-400);
+          }
+        }
+      }
+
+      .language-switcher {
+        grid-row: 2;
+        grid-column: 2/3;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    nav {
+      margin-block: var(--spacing-400);
+      grid-template-columns: auto 1fr auto;
+      grid-template-rows: auto;
+
+      & img {
+        grid-column: 1/2;
+        grid-row: 1/1;
+        height: 70px;
+        width: auto;
+        max-width: inherit;
+      }
+
+      & .inner-nav {
+        grid-column: 2/3;
+        grid-row: 1/1;
+        align-self: flex-end;
+        justify-self: center;
+
+        & ul {
+          gap: var(--spacing-400);
+
+          & li {
+            height: initial;
+
+            & a {
+              font-size: var(--font-300);
+            }
+          }
+
+          &.active {
+            height: initial;
+          }
+        }
+      }
+
+      .language-switcher {
+        grid-column: 3/4;
+        grid-row: 1/1;
+        justify-self: end;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    nav {
+      margin-block: var(--spacing-500);
+
+      & img {
+        height: 90px;
+      }
+
+      & .inner-nav {
+        & ul {
+          gap: var(--spacing-600);
+          gap: var(--spacing-600);
+
+          & li a {
+            font-size: var(--font-400);
+          }
+        }
+      }
+    }
+  }
+</style>

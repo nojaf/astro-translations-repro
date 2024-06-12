@@ -1,18 +1,15 @@
 ---
-import { getLocale, t } from "i18n:astro"
+import { getLocale, t } from "i18n:astro";
+import Layout from "../layouts/Layout.astro";
 
-const locale = getLocale()
+const locale = getLocale();
 console.log(locale);
 const lang = locale;
-const greeting = t("common:greeting")
+const greeting = t("common:greeting");
 ---
 
-<html>
-    <head>
-    </head>
-    <body>
-        <hr>
-        <h1>Yow intl _ {lang} {greeting}</h1>
-        <hr>
-    </body>
-</html>
+<Layout>
+  <main class="container">
+    <p>{lang} {greeting}</p>
+  </main>
+</Layout>

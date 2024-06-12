@@ -1,0 +1,51 @@
+---
+import { getLocale, getLocales, switchLocalePath } from "i18n:astro";
+const locales = getLocales();
+const current = getLocale();
+
+const { className } = Astro.props;
+---
+
+<ul class={className}>
+  {
+    locales.map((l) => {
+      const className = l === current ? "active" : "";
+      return (
+        <li class={className}>
+          <a href={switchLocalePath(l)}>{l}</a>
+        </li>
+      );
+    })
+  }
+</ul>
+<style>
+  ul {
+    list-style: none;
+    text-transform: uppercase;
+    font-family: var(--heading-font);
+
+    & li {
+      display: inline-block;
+      padding-inline: var(--spacing-300);
+    }
+
+    & .active a {
+      color: var(--vanbot-500);
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--black-400);
+
+    &:hover {
+      color: var(--vanbot-600);
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    ul li {
+      padding-inline: var(--spacing-100);
+    }
+  }
+</style>
