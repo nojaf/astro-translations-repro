@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { getLocalePath } from "i18n:astro";
+import { getLocalePath, getLocale } from "i18n:astro";
 import headerImage from "../images/header-logo.png";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 
@@ -9,6 +9,13 @@ const assuntaLink = getLocalePath("/assunta/");
 const alettaLink = getLocalePath("/aletta/");
 const vanbotLink = getLocalePath("/vanbot/");
 const contactLink = getLocalePath("/contact/");
+
+let pathname = new URL(Astro.request.url).pathname;
+const localPrefix = `/${getLocale()}/`;
+if (pathname.startsWith(localPrefix)) {
+  pathname = pathname.replace(localPrefix, "");
+}
+console.log("yow", pathname);
 ---
 
 <nav class="container">
@@ -21,19 +28,19 @@ const contactLink = getLocalePath("/contact/");
     </button>
     <input type="checkbox" name="menu-check" />
     <ul>
-      <li class="active">
+      <li class:list={[{ active: /^\/?$/.test(pathname) }]}>
         <a href={homeLink}>Home</a>
       </li>
-      <li>
+      <li class:list={[{ active: /assunta/.test(pathname) }]}>
         <a href={assuntaLink}>Assunta</a>
       </li>
-      <li>
+      <li class:list={[{ active: /aletta/.test(pathname) }]}>
         <a href={alettaLink}>Aletta</a>
       </li>
-      <li>
+      <li class:list={[{ active: /vanbot/.test(pathname) }]}>
         <a href={vanbotLink}>Vanbot</a>
       </li>
-      <li>
+      <li class:list={[{ active: /contact/.test(pathname) }]}>
         <a href={contactLink}>Contact</a>
       </li>
     </ul>
