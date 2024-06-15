@@ -45,3 +45,25 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+
+## Video conversation
+
+Video were optimized for the web using `ffmpeg`:
+
+```bash
+ffmpeg -i assunta.mp4 -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k -movflags +faststart assunta_web.mp4
+
+ffmpeg -i assunta.mp4 -c:v libvpx-vp9 -b:v 1M -c:a libvorbis assunta_web.webm
+
+ffmpeg -i aletta.mp4 -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k -movflags +faststart aletta_web.mp4
+
+ffmpeg -i aletta.mp4 -c:v libvpx-vp9 -b:v 1M -c:a libvorbis aletta.webm
+```
+
+The first still images were generated via:
+
+```bash
+ffmpeg -i assunta_web.mp4 -vframes 1 -q:v 2 "assunta_still.jpg" ; mv ./assunta_still.jpg ../images/
+ffmpeg -i aletta_web.mp4 -vframes 1 -q:v 2 "aletta_still.jpg" ; mv ./aletta_still.jpg ../images/
+```

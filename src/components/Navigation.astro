@@ -1,10 +1,20 @@
 ---
+import { Image } from "astro:assets";
+import { getLocalePath } from "i18n:astro";
 import headerImage from "../images/header-logo.png";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
+
+const homeLink = getLocalePath("/");
+const assuntaLink = getLocalePath("/assunta/");
+const alettaLink = getLocalePath("/aletta/");
+const vanbotLink = getLocalePath("/vanbot/");
+const contactLink = getLocalePath("/contact/");
 ---
 
 <nav class="container">
-  <img src={headerImage.src} />
+  <a href={homeLink}>
+    <Image height={90} alt="Vanbot logo" src={headerImage} />
+  </a>
   <div class="inner-nav">
     <button role="navigation">
       <iconify-icon icon="ion:menu-sharp" width="45" height="45"></iconify-icon>
@@ -12,19 +22,19 @@ import LanguageSwitcher from "../components/LanguageSwitcher.astro";
     <input type="checkbox" name="menu-check" />
     <ul>
       <li class="active">
-        <a href="#">Home</a>
+        <a href={homeLink}>Home</a>
       </li>
       <li>
-        <a href="#">Assunta</a>
+        <a href={assuntaLink}>Assunta</a>
       </li>
       <li>
-        <a href="#">Aletta</a>
+        <a href={alettaLink}>Aletta</a>
       </li>
       <li>
-        <a href="#">Vanbot</a>
+        <a href={vanbotLink}>Vanbot</a>
       </li>
       <li>
-        <a href="#">Contact</a>
+        <a href={contactLink}>Contact</a>
       </li>
     </ul>
   </div>
@@ -37,17 +47,13 @@ import LanguageSwitcher from "../components/LanguageSwitcher.astro";
       var(--toggle-icon-size) + var(--spacing-50) + var(--spacing-50)
     );
 
-    margin-top: var(--spacing-300);
+    margin-block: var(--spacing-300);
     display: flex;
     flex-direction: column;
     gap: var(--spacing-300);
 
-    > a {
-      display: block;
-      text-align: center;
-      text-decoration: none;
-      color: var(--black-400);
-      font-size: var(--font-300);
+    a img {
+      object-fit: contain;
     }
 
     .inner-nav {
@@ -66,12 +72,13 @@ import LanguageSwitcher from "../components/LanguageSwitcher.astro";
           opacity: 0;
           height: var(--menu-item-height);
           font-size: var(--font-500);
+          font-weight: 300;
           transition: all 200ms;
 
           &.active {
             display: block;
             text-transform: uppercase;
-            font-weight: 600;
+            font-weight: 400;
             opacity: 1;
             height: var(--menu-item-height);
 
@@ -176,7 +183,7 @@ import LanguageSwitcher from "../components/LanguageSwitcher.astro";
           display: flex;
           height: initial;
           justify-content: center;
-          gap: var(--spacing-500);
+          gap: var(--spacing-400);
           padding-block: var(--spacing-300);
 
           & li {
@@ -196,12 +203,22 @@ import LanguageSwitcher from "../components/LanguageSwitcher.astro";
     }
   }
 
+  @media screen and (min-width: 600px) {
+    nav {
+      & .inner-nav {
+        & ul {
+          gap: var(--spacing-600);
+        }
+      }
+    }
+  }
+
   @media screen and (min-width: 768px) {
     nav {
       display: grid;
       grid-template-rows: auto auto;
       grid-template-columns: 50% 50%;
-      column-gap: var(--spacing-400);
+      column-gap: var(--spacing-300);
 
       & img {
         grid-column: 1/2;
@@ -235,6 +252,7 @@ import LanguageSwitcher from "../components/LanguageSwitcher.astro";
       margin-block: var(--spacing-400);
       grid-template-columns: auto 1fr auto;
       grid-template-rows: auto;
+      column-gap: var(--spacing-400);
 
       & img {
         grid-column: 1/2;
@@ -255,10 +273,6 @@ import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 
           & li {
             height: initial;
-
-            & a {
-              font-size: var(--font-300);
-            }
           }
 
           &.active {
@@ -285,11 +299,10 @@ import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 
       & .inner-nav {
         & ul {
-          gap: var(--spacing-600);
-          gap: var(--spacing-600);
+          gap: var(--spacing-500);
 
           & li a {
-            font-size: var(--font-400);
+            font-size: var(--font-500);
           }
         }
       }

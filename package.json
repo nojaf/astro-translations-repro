@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier src -w"
   },
   "dependencies": {
     "@astrolicious/i18n": "^0.4.3",

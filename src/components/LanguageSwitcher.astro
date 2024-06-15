@@ -10,9 +10,11 @@ const { className } = Astro.props;
   {
     locales.map((l) => {
       const className = l === current ? "active" : "";
+      let href = switchLocalePath(l);
+      href = href.endsWith("/") ? href : `${href}/`;
       return (
         <li class={className}>
-          <a href={switchLocalePath(l)}>{l}</a>
+          <a href={href}>{l}</a>
         </li>
       );
     })
@@ -22,7 +24,6 @@ const { className } = Astro.props;
   ul {
     list-style: none;
     text-transform: uppercase;
-    font-family: var(--heading-font);
 
     & li {
       display: inline-block;

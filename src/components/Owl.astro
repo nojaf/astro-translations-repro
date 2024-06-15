@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import owl from "../images/owl.png";
+
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<header>
+  <div class="container">
+    <Image src={owl} height={220} alt="Vanbot owl" />
+    {title && <h1>{title}</h1>}
+  </div>
+</header>
+<style>
+  header {
+    --header-height: 100px;
+    /* matching background color of owl image */
+    background-color: #0d0c0a;
+    color: var(--white);
+
+    & .container {
+      position: relative;
+      height: var(--header-height);
+    }
+  }
+
+  img {
+    display: inline-block;
+    height: var(--header-height);
+    position: absolute;
+    object-fit: contain;
+    object-position: 0;
+  }
+
+  h1 {
+    font-size: var(--font-500);
+    text-align: right;
+    position: absolute;
+    bottom: var(--spacing-200);
+    right: var(--spacing-200);
+    font-weight: 300;
+  }
+
+  @media screen and (min-width: 500px) {
+    header {
+      --header-height: 120px;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    header {
+      --header-height: 150px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    header {
+      --header-height: 220px;
+    }
+
+    h1 {
+      font-size: var(--font-700);
+      bottom: var(--spacing-400);
+      right: var(--spacing-400);
+    }
+  }
+</style>
