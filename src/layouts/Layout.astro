@@ -14,6 +14,21 @@ const bowsUrl = `url("${bows.src}")`;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanbot</title>
     <ViewTransitions />
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      href="/favicon-32x32.png?v=latest"
+      type="image/png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      href="/favicon-16x16.png?v=latest"
+      type="image/png"
+      sizes="16x16"
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -254,10 +269,14 @@ const bowsUrl = `url("${bows.src}")`;
           margin-bottom: var(--spacing-200);
         }
 
-        p,
-        ul,
-        ol {
+        & p,
+        & ul,
+        & ol {
           margin-bottom: var(--spacing-400);
+        }
+
+        & p {
+          font-size: var(--font-400);
         }
       }
     </style>

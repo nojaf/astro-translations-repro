@@ -1,9 +1,156 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getLocale, t, getLocalePath } from "i18n:astro";
+import { Image } from "astro:assets";
+
+import assunta75 from "../images/assunta-75.jpg";
+import assunta40 from "../images/assunta-40.jpg";
+import assuntaRecta from "../images/assunta-recta.jpg";
+import frankVerdonck from "../images/frank-verdonck.jpg";
+import vanbotUniversalDCControl from "../images/vanbot-universal-dc-control.jpg";
+
+const imageHeight = 300;
 ---
 
 <Layout>
   <main class="container">
-    <p>vanbot</p>
+    <h2 id="verticalDoors">{t("vanbot:verticalDoors")}</h2>
+    <section id="assunta75">
+      <h3>Assunta 75</h3>
+      <Image src={assunta75} height={imageHeight} alt="Assunta 75" />
+      <p>
+        {t("vanbot:assunta75")}
+      </p>
+    </section>
+    <section id="assunta40">
+      <h3>Assunta 40</h3>
+      <Image src={assunta40} height={imageHeight} alt="Assunta 40" />
+      <p>
+        {t("vanbot:assunta40")}
+      </p>
+    </section>
+    <section id="assuntaRecta">
+      <h3>Assunta Recta</h3>
+      <Image src={assuntaRecta} height={imageHeight} alt="Assunta Recta" />
+      <p>
+        {t("vanbot:assuntaRecta")}
+      </p>
+    </section>
+    <h2 id="frank-verdonck">Frank Verdonck</h2>
+    <section id="autodidact">
+      <h3>{t("vanbot:autodidactTitle")}</h3>
+      <Image src={frankVerdonck} height={imageHeight} alt="Frank Verdonck" />
+      <p>
+        {t("vanbot:autodidact")}
+      </p>
+    </section>
+    <section id="wifiBlueToothAppAi">
+      <h3>{t("vanbot:wifiBlueToothAppAiTitle")}</h3>
+      <p>
+        {t("vanbot:wifiBlueToothAppAi")}
+      </p>
+    </section>
   </main>
 </Layout>
+
+<style define:vars={{ ["image-height"]: `${imageHeight}px` }}>
+  @media (min-width: 500px) {
+    body {
+      --bows-top: 40vh;
+    }
+  }
+
+  h2 {
+    background-color: var(--vanbot-500);
+    color: var(--white);
+    padding: var(--spacing-100) var(--spacing-300);
+    display: inline-block;
+    font-size: var(--font-600);
+    font-weight: 300;
+    margin-block: var(--spacing-300);
+
+    &:last-of-type {
+      background-color: cornflowerblue;
+    }
+  }
+
+  h2 + section {
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: var(--font-500);
+    font-weight: imageHeight;
+    margin-top: 0;
+    color: var(--vanbot-600);
+  }
+
+  section {
+    margin-block: var(--spacing-500);
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    max-width: 644px;
+    margin-block: var(--spacing-400);
+  }
+
+  @media screen and (min-width: 1024px) {
+    main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(4, auto);
+      column-gap: var(--spacing-500);
+      row-gap: var(--spacing-600);
+      margin-bottom: var(--spacing-600);
+
+      & #verticalDoors,
+      & #frank-verdonck {
+        grid-row: 1;
+      }
+
+      & #assunta75,
+      & #autodidact {
+        grid-row: 2;
+      }
+
+      & #assunta40,
+      & #wifiBlueToothAppAi {
+        grid-row: 3;
+      }
+
+      & #assuntaRecta {
+        grid-row: 4;
+      }
+
+      & #verticalDoors,
+      & #assunta40,
+      & #assunta75,
+      & #assuntaRecta {
+        grid-column: 1;
+      }
+
+      & #frank-verdonck,
+      & #autodidact,
+      & #wifiBlueToothAppAi {
+        grid-column: 2;
+      }
+    }
+
+    img {
+      width: 100%;
+      max-height: var(--image-height);
+      object-fit: cover;
+    }
+
+    section {
+      margin: 0;
+
+      & p:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+</style>
