@@ -1,7 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getLocale, t, getLocalePath } from "i18n:astro";
+import { t } from "i18n:astro";
 import { Image } from "astro:assets";
+import Owl from "../components/Owl.astro";
 
 import assunta75 from "../images/assunta-75.jpg";
 import assunta40 from "../images/assunta-40.jpg";
@@ -13,6 +14,7 @@ const imageHeight = 300;
 ---
 
 <Layout>
+  <Owl />
   <main class="container">
     <h2 id="verticalDoors">{t("vanbot:verticalDoors")}</h2>
     <section id="assunta75">
@@ -46,6 +48,11 @@ const imageHeight = 300;
     </section>
     <section id="wifiBlueToothAppAi">
       <h3>{t("vanbot:wifiBlueToothAppAiTitle")}</h3>
+      <Image
+        src={vanbotUniversalDCControl}
+        height={imageHeight}
+        alt={t("vanbot:wifiBlueToothAppAiTitle")}
+      />
       <p>
         {t("vanbot:wifiBlueToothAppAi")}
       </p>
