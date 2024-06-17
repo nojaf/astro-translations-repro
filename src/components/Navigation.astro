@@ -19,7 +19,7 @@ if (pathname.startsWith(localPrefix)) {
 
 <nav class="container">
   <a href={homeLink}>
-    <Image height={90} alt="Vanbot logo" src={headerImage} />
+    <Image height={60} alt="Vanbot logo" src={headerImage} />
   </a>
   <div class="inner-nav">
     <button role="navigation">
@@ -57,6 +57,11 @@ if (pathname.startsWith(localPrefix)) {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-300);
+
+    > a {
+      display: block;
+      margin-inline: auto;
+    }
 
     a img {
       object-fit: contain;
@@ -190,7 +195,6 @@ if (pathname.startsWith(localPrefix)) {
           height: initial;
           justify-content: center;
           gap: var(--spacing-400);
-          padding-block: var(--spacing-300);
 
           & li {
             display: block;
@@ -223,20 +227,33 @@ if (pathname.startsWith(localPrefix)) {
     nav {
       display: grid;
       grid-template-rows: auto auto;
-      grid-template-columns: 50% 50%;
+      grid-template-columns: 1fr 1fr;
       column-gap: var(--spacing-300);
+      row-gap: var(--spacing-200);
+      margin: var(--spacing-100) auto;
+      padding: 0;
 
-      & img {
+      & > a {
         grid-column: 1/2;
+        grid-row: 1/3;
         padding: 0;
+        margin: 0;
+        justify-self: start;
+        align-self: center;
+
+        & img {
+          padding: 0;
+        }
       }
 
       & .inner-nav {
-        grid-row: 1;
+        grid-row: 2;
         grid-column: 2/3;
+        align-self: start;
+        justify-self: end;
 
         & ul {
-          gap: var(--spacing-300);
+          gap: var(--spacing-500);
           padding: 0;
           align-self: center;
 
@@ -247,35 +264,23 @@ if (pathname.startsWith(localPrefix)) {
       }
 
       .language-switcher {
-        grid-row: 2;
+        grid-row: 1;
         grid-column: 2/3;
+        align-self: end;
+        justify-self: end;
+        margin-inline: 0;
       }
     }
   }
 
   @media screen and (min-width: 1024px) {
     nav {
-      margin-block: var(--spacing-400);
-      grid-template-columns: auto 1fr auto;
-      grid-template-rows: auto;
       column-gap: var(--spacing-400);
-
-      & img {
-        grid-column: 1/2;
-        grid-row: 1/1;
-        height: 70px;
-        width: auto;
-        max-width: inherit;
-      }
+      padding-inline: var(--spacing-300);
 
       & .inner-nav {
-        grid-column: 2/3;
-        grid-row: 1/1;
-        align-self: flex-end;
-        justify-self: center;
-
         & ul {
-          gap: var(--spacing-400);
+          gap: var(--spacing-600);
 
           & li {
             height: initial;
@@ -288,29 +293,7 @@ if (pathname.startsWith(localPrefix)) {
       }
 
       .language-switcher {
-        grid-column: 3/4;
-        grid-row: 1/1;
         justify-self: end;
-      }
-    }
-  }
-
-  @media screen and (min-width: 1200px) {
-    nav {
-      margin-block: var(--spacing-500);
-
-      & img {
-        height: 90px;
-      }
-
-      & .inner-nav {
-        & ul {
-          gap: var(--spacing-500);
-
-          & li a {
-            font-size: var(--font-500);
-          }
-        }
       }
     }
   }

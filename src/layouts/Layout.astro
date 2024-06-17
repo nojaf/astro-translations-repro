@@ -2,7 +2,7 @@
 import { ViewTransitions } from "astro:transitions";
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
-import bows from "../images/bows.png";
+import bows from "../images/bows-lighter.png";
 const bowsUrl = `url("${bows.src}")`;
 ---
 
@@ -147,6 +147,8 @@ const bowsUrl = `url("${bows.src}")`;
           background-position: 0 var(--bows-top);
           background-repeat: no-repeat;
           background-size: contain;
+          background-attachment: fixed;
+          background-blend-mode: multiply;
         }
       }
 

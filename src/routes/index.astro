@@ -14,9 +14,6 @@ import alettaStill from "../images/aletta_still.jpg";
 import alettaVideoMp4 from "../videos/aletta_web.mp4";
 import alettaVideoWebm from "../videos/aletta_web.webm";
 
-const locale = getLocale();
-const lang = locale;
-const greeting = t("common:greeting");
 const assuntaLink = getLocalePath("/assunta/");
 const alettaLink = getLocalePath("/aletta/");
 ---
@@ -28,7 +25,7 @@ const alettaLink = getLocalePath("/aletta/");
       <a href={assuntaLink}>
         <Image src={assuntaLogo} alt="Assunta" height={100} />
       </a>
-      <video muted poster={assuntaStill.src} controls>
+      <video muted poster={assuntaStill.src} controls autoplay loop>
         <source src={assuntaVideoMp4} type="video/mp4" />
         <source src={assuntaVideoWebm} type="video/webm" />
       </video>
@@ -46,7 +43,7 @@ const alettaLink = getLocalePath("/aletta/");
 </Layout>
 <style>
   main {
-    padding-block: var(--spacing-600);
+    margin-block: var(--spacing-400);
     display: flex;
     flex-direction: column;
     gap: var(--spacing-600);
@@ -62,34 +59,16 @@ const alettaLink = getLocalePath("/aletta/");
       }
 
       & video {
-        margin-top: var(--spacing-600);
-      }
-    }
-  }
-
-  @media (min-width: 500px) {
-    main {
-      & .product {
-        & video {
-          margin-inline: auto;
-        }
+        margin-top: var(--spacing-400);
+        width: 100%;
       }
     }
   }
 
   @media (min-width: 1024px) {
     main {
-      flex-direction: row;
-      gap: var(--spacing-700);
-
-      & .product {
-        flex-grow: 1;
-
-        & img {
-          height: 100px;
-          object-fit: contain;
-        }
-      }
+      gap: var(--spacing-800);
+      margin-bottom: var(--spacing-800);
     }
   }
 </style>

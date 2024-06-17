@@ -11,7 +11,7 @@ const { title } = Astro.props;
 
 <header class:list={[{ minimal: title === undefined }]}>
   <div class="container">
-    <Image src={owl} height={220} alt="Vanbot owl" />
+    <Image src={owl} height={250} alt="Vanbot owl" />
     {title && <h1>{title}</h1>}
   </div>
 </header>
@@ -74,11 +74,11 @@ const { title } = Astro.props;
 
   @media screen and (min-width: 1024px) {
     header {
-      --header-height: 220px;
+      --header-height: 250px;
     }
 
     h1 {
-      font-size: var(--font-700);
+      font-size: var(--font-800);
       bottom: var(--spacing-400);
       right: var(--spacing-400);
     }

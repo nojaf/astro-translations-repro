@@ -28,6 +28,10 @@ const { className } = Astro.props;
     & li {
       display: inline-block;
       padding-inline: var(--spacing-300);
+
+      &:last-of-type {
+        padding-right: 0;
+      }
     }
 
     & .active a {
