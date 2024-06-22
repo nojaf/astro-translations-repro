@@ -1,9 +1,166 @@
 ---
+import { t } from "i18n:astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
   <main class="container">
-    <p>contact</p>
+    <h1>Contact</h1>
+    <form action="#" method="post" autocomplete="on">
+      <input
+        type="text"
+        required
+        placeholder={t("contact:name")}
+        autocomplete="given-name"
+        name="name"
+      />
+      <input
+        type="text"
+        required
+        placeholder={t("contact:company")}
+        autocomplete="organization"
+        name="company"
+      />
+      <input
+        type="text"
+        required
+        placeholder={t("contact:street")}
+        autocomplete="street-address"
+        name="street"
+        id="street"
+      />
+      <input
+        type="text"
+        required
+        placeholder={t("contact:zip")}
+        autocomplete="postal-code"
+        name="zip"
+      />
+      <input
+        type="text"
+        required
+        placeholder={t("contact:municipality")}
+        autocomplete="address-level2"
+        name="municipality"
+      />
+      <input
+        type="tel"
+        required
+        placeholder={t("contact:telephone")}
+        autocomplete="tel"
+        name="phone"
+      />
+      <input
+        type="email"
+        required
+        placeholder={t("contact:email")}
+        autocomplete="email"
+        name="email"
+      />
+      <textarea
+        required
+        name="question"
+        id="question"
+        placeholder={t("contact:question")}
+        rows="5"></textarea>
+      <small>
+        {t("contact:remark")}
+      </small>
+      <input type="submit" id="submit" value={t("contact:submit")} />
+    </form>
   </main>
 </Layout>
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-300);
+
+    &.dirty input:invalid:not(:focus),
+    &.dirty textarea:invalid:not(:focus) {
+      border: 1px solid #b64725;
+    }
+
+    & input,
+    & textarea {
+      width: 100%;
+      padding: var(--spacing-50) var(--spacing-100);
+      background-color: var(--vanbot-25);
+      border: 1px solid var(--black-200);
+
+      &::placeholder {
+        text-transform: uppercase;
+      }
+
+      &:focus {
+        outline: 3px solid var(--vanbot-300);
+      }
+    }
+
+    & small {
+      color: var(--black-600);
+    }
+
+    & input[type="submit"] {
+      background-color: var(--vanbot-500);
+      color: var(--white);
+      border-color: var(--vanbot-800);
+      cursor: pointer;
+      width: initial;
+      align-self: flex-end;
+      font-size: var(--font-500);
+      padding: var(--spacing-100) var(--spacing-600);
+      transition: all 300ms;
+      text-transform: uppercase;
+
+      &:hover {
+        background-color: var(--vanbot-400);
+      }
+
+      &:focus {
+        outline: none;
+        background-color: var(--vanbot-600);
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      & #street,
+      #submit,
+      small {
+        grid-column: 1/3;
+      }
+
+      & #submit {
+        justify-self: end;
+      }
+    }
+  }
+</style>
+<script>
+  addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("form");
+    if (!form) return;
+
+    const submit = document.querySelector("#submit");
+    if (!submit) return;
+
+    submit.addEventListener("click", () => {
+      if (!form.checkValidity()) {
+        form.classList.add("dirty");
+      }
+    });
+
+    form.addEventListener("submit", (ev) => {
+      console.log("yow");
+      ev.preventDefault();
+      const formData = new FormData(form);
+      const json = JSON.stringify(Object.fromEntries(formData));
+      alert(json);
+    });
+  });
+</script>

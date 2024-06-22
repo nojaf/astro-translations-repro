@@ -1,0 +1,12 @@
+{
+  "name": "naam",
+  "company": "bedrijf",
+  "street": "straat + nummer",
+  "zip": "postcode",
+  "municipality": "plaats",
+  "telephone": "telefoon",
+  "email": "email",
+  "question": "vraag",
+  "remark": "Alle velden zijn verplicht.",
+  "submit": "verstuur"
+}
