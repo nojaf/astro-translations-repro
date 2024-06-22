@@ -1,9 +1,258 @@
 ---
+import { Image } from "astro:assets";
+import { t, getLocalePath, getLocale } from "i18n:astro";
 import Layout from "../layouts/Layout.astro";
+import assuntaLogo from "../images/assunta.png";
+import assuntaStill from "../images/assunta_still.jpg";
+import assuntaVideoMp4 from "../videos/assunta_web.mp4";
+import assuntaVideoWebm from "../videos/assunta_web.webm";
+
+import application1 from "../images/assunta/application/Assunta Toepassing 1.jpg";
+import application2 from "../images/assunta/application/Assunta Toepassing 2.jpg";
+import application3 from "../images/assunta/application/Assunta Toepassing 3.jpg";
+import application4 from "../images/assunta/application/Assunta Toepassing 4.jpg";
+import application5 from "../images/assunta/application/Assunta Toepassing 5.jpg";
+import application6 from "../images/assunta/application/Assunta Toepassing 6.jpg";
+import application7 from "../images/assunta/application/Assunta Toepassing 7.jpg";
+
+const applications = [
+  application1,
+  application2,
+  application3,
+  application4,
+  application5,
+  application6,
+  application7,
+].map((img, idx) => ({ img, title: t(`assunta:application-${idx + 1}`) }));
+
+import install1 from "../images/assunta/install/Assunta Install 1.png";
+import install2 from "../images/assunta/install/Assunta Install 2.png";
+import install3 from "../images/assunta/install/Assunta Install 3.png";
+import install4 from "../images/assunta/install/Assunta Install 4.png";
+import install5 from "../images/assunta/install/Assunta Install 5.png";
+import install6 from "../images/assunta/install/Assunta Install 6.png";
+
+const installs = [
+  install1,
+  install2,
+  install3,
+  install4,
+  install5,
+  install6,
+].map((img, idx) => ({ img, title: t(`assunta:install-${idx + 1}`) }));
+
+import configurator from "../images/assunta/Configurator Assunta NL 480 x 270.gif";
+const configuratorLink = getLocalePath("/configurator/");
+
+import technicalDrawingsPreview from "../images/assunta/technical-drawings-preview.png";
+
+import downloads1_de from "../images/assunta/downloads/Assunta Business-Brochure EN.jpg"; // TODO: DE is missing
+import downloads1_en from "../images/assunta/downloads/Assunta Business-Brochure EN.jpg";
+import downloads1_fr from "../images/assunta/downloads/Assunta Business-Brochure FR.jpg";
+import downloads1_nl from "../images/assunta/downloads/Assunta Business-Brochure NL.jpg";
+
+import downloads2_de from "../images/assunta/downloads/Assunta CE-Document DE.jpg";
+import downloads2_en from "../images/assunta/downloads/Assunta CE-Document EN.jpg";
+import downloads2_fr from "../images/assunta/downloads/Assunta CE-Document FR.jpg";
+import downloads2_nl from "../images/assunta/downloads/Assunta CE-Document NL.jpg";
+
+import downloads3_de from "../images/assunta/downloads/Assunta Handleiding DE.jpg";
+import downloads3_en from "../images/assunta/downloads/Assunta Handleiding EN.jpg";
+import downloads3_fr from "../images/assunta/downloads/Assunta Handleiding FR.jpg";
+import downloads3_nl from "../images/assunta/downloads/Assunta Handleiding NL.jpg";
+
+import downloads4_de from "../images/assunta/downloads/Assunta Order-Form DE.jpg";
+import downloads4_en from "../images/assunta/downloads/Assunta Order-Form EN.jpg";
+import downloads4_fr from "../images/assunta/downloads/Assunta Order-Form FR.jpg";
+import downloads4_nl from "../images/assunta/downloads/Assunta Order-Form NL.jpg";
+
+const allDownloads = {
+  de: [downloads1_de, downloads2_de, downloads3_de, downloads4_de],
+  en: [downloads1_en, downloads2_en, downloads3_en, downloads4_en],
+  fr: [downloads1_fr, downloads2_fr, downloads3_fr, downloads4_fr],
+  nl: [downloads1_nl, downloads2_nl, downloads3_nl, downloads4_nl],
+};
+
+const current = getLocale();
+const downloads = allDownloads[current].map((img, idx) => ({
+  img,
+  title: t(`assunta:downloads-${idx + 1}`),
+}));
 ---
 
 <Layout>
   <main class="container">
-    <p>Assunta</p>
+    <Image src={assuntaLogo} alt="Assunta" height={70} />
+    <h1>Assunta</h1>
+    <section>
+      <h2>{t("assunta:tagLineTitle")}</h2>
+      <video muted poster={assuntaStill.src} controls autoplay>
+        <source src={assuntaVideoMp4} type="video/mp4" />
+        <source src={assuntaVideoWebm} type="video/webm" />
+      </video>
+      <p>{t("assunta:intro")}</p>
+    </section>
+    <section>
+      <h2>{t("assunta:applicationsTitle")}</h2>
+      <div class="grid">
+        {
+          applications.map(({ img, title }) => {
+            return (
+              <div>
+                <Image src={img} height={400} alt={title} />
+                <p>{title}</p>
+              </div>
+            );
+          })
+        }
+      </div>
+    </section>
+    <section>
+      <h2>{t("assunta:configuratorTitle")}</h2>
+      <div class="grid">
+        {
+          installs.map(({ img, title }) => {
+            return (
+              <div>
+                <Image src={img} height={400} alt={title} />
+                <p>{title}</p>
+              </div>
+            );
+          })
+        }
+      </div>
+    </section>
+    <section>
+      <h2>{t("assunta:configuratorTitle")}</h2>
+      <a href={configuratorLink} target="_blank">
+        <Image
+          src={configurator}
+          height={400}
+          alt={t("assunta:configuratorAlt")}
+        />
+      </a>
+    </section>
+    <section>
+      <h2>{t("assunta:technicalDrawingsTitle")}</h2>
+      <a href="#" download>
+        <Image
+          src={technicalDrawingsPreview}
+          alt={t("assunta:technicalDrawingsAlt")}
+        />
+      </a>
+    </section>
+    <section>
+      <h2>{t("assunta:downloadsTitle")}</h2>
+      <div class="grid downloads">
+        {
+          downloads.map(({ img, title }) => {
+            return (
+              <div>
+                <a href="#" download>
+                  <Image src={img} height={800} alt={title} />
+                  <p>{title}</p>
+                </a>
+              </div>
+            );
+          })
+        }
+      </div>
+    </section>
   </main>
 </Layout>
+<style>
+  h1 {
+    display: none;
+  }
+
+  section {
+    margin-block: var(--spacing-400);
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    > a {
+      display: block;
+      margin-top: var(--spacing-500);
+      text-decoration: none;
+      &:hover img {
+        opacity: 0.75;
+        outline: 2px solid var(--vanbot-200);
+      }
+
+      > img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  h2 {
+    color: var(--vanbot-600);
+    text-align: center;
+  }
+
+  video {
+    margin-block: var(--spacing-400);
+    width: 100%;
+  }
+
+  .grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-200);
+
+    > div {
+      & a {
+        text-decoration: none;
+        color: var(--black-950);
+
+        &:hover img {
+          opacity: 0.75;
+          outline: 2px solid var(--vanbot-200);
+        }
+      }
+
+      & img {
+        margin-bottom: var(--spacing-300);
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  .downloads {
+    background-color: var(--black-50);
+    padding: var(--spacing-200);
+    padding-bottom: var(--spacing-600);
+  }
+
+  @media (min-width: 768px) {
+    section {
+      margin-block: var(--spacing-800);
+
+      > a img {
+        max-width: 60%;
+        margin-inline: auto;
+      }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-500);
+
+      > div {
+        & p {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .downloads {
+      padding: var(--spacing-400);
+      padding-bottom: var(--spacing-900);
+    }
+  }
+</style>
