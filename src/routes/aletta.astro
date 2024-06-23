@@ -1,9 +1,171 @@
 ---
+import { Image } from "astro:assets";
+import { t, getLocalePath, getLocale } from "i18n:astro";
 import Layout from "../layouts/Layout.astro";
+
+import alettaLogo from "../images/aletta.png";
+import alettaStill from "../images/aletta_still.jpg";
+import alettaVideoMp4 from "../videos/aletta_web.mp4";
+import alettaVideoWebm from "../videos/aletta_web.webm";
+
+import application1 from "../images/aletta/application/Aletta Toepassing 1.jpg";
+import application2 from "../images/aletta/application/Aletta Toepassing 2.jpg";
+
+const applications = [application1, application2].map((img, idx) => ({
+  img,
+  title: t(`aletta:application-${idx + 1}`),
+}));
+
+import systemIntro from "../images/aletta/system/Aletta Systeem 1.jpg"
+
+import system1 from "../images/aletta/system/Aletta Systeem 2.jpg"
+import system2 from "../images/aletta/system/Aletta Systeem 2.png"
+import system3 from "../images/aletta/system/Aletta Systeem 3.jpg"
+import system4 from "../images/aletta/system/Aletta Systeem 4.png"
+
+const systems = [
+  system1,
+  system2,
+  system3,
+  system4
+].map((img, idx) => ({ img, title: t(`aletta:system-${idx+1}`)}));
+
+import technicalDrawingsPreview from "../images/assunta/technical-drawings-preview.png";
 ---
 
 <Layout>
   <main class="container">
-    <p>aletta</p>
+    <Image src={alettaLogo} alt="Aletta" height={70} />
+    <h1>Aletta</h1>
+    <section>
+      <h2>{t("aletta:tagLineTitle")}</h2>
+      <video muted poster={alettaStill.src} controls autoplay>
+        <source src={alettaVideoMp4} type="video/mp4" />
+        <source src={alettaVideoWebm} type="video/webm" />
+      </video>
+      <p>{t("aletta:intro")}</p>
+      <div class="grid">
+        {applications.map(({img, title}) => {
+          return <div>
+           <Image src={img} height={400} alt={title} />
+            <p>{title}</p>
+          </div>
+        })}
+      </div>
+    </section>
+    <section>
+      <h2>{t("aletta:systemTitle")}</h2>
+      <div class="grid">
+        <div class="wide">
+          <Image src={systemIntro} height={650} alt={t("aletta:systemIntro")} />
+          <p>{t("aletta:systemIntro")}</p>
+        </div>
+        {systems.map(({img, title}) => {
+          return <div>
+           <Image src={img} height={400} alt={title} />
+            <p>{title}</p>
+          </div>
+        })}
+      </div>
+    </section>
+    <section>
+      <h2>{t("aletta:technicalDrawingsTitle")}</h2>
+      <a href="#" download>
+        <Image
+          src={technicalDrawingsPreview}
+          alt={t("assunta:technicalDrawingsAlt")}
+        />
+      </a>
+    </section>
   </main>
 </Layout>
+<style>
+  h1 {
+    display: none;
+  }
+
+  section {
+    margin-block: var(--spacing-400);
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    > a {
+      display: block;
+      margin-top: var(--spacing-500);
+      text-decoration: none;
+      &:hover img {
+        opacity: 0.75;
+        outline: 2px solid var(--vanbot-200);
+      }
+
+      > img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  h2 {
+    color: var(--vanbot-600);
+    text-align: center;
+    margin-bottom: var(--spacing-400);
+  }
+
+  video {
+    margin-block: var(--spacing-400);
+    width: 100%;
+  }
+
+  .grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-200);
+
+    > div {
+      & a {
+        text-decoration: none;
+        color: var(--black-950);
+
+        &:hover img {
+          opacity: 0.75;
+          outline: 2px solid var(--vanbot-200);
+        }
+      }
+
+      & img {
+        margin-bottom: var(--spacing-300);
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    section {
+      margin-block: var(--spacing-800);
+
+      > a img {
+        max-width: 60%;
+        margin-inline: auto;
+      }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-500);
+
+      > div {
+        &.wide {
+          grid-column: 1/3;
+        }
+
+        & p {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+</style>
