@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import { t, getLocalePath, getLocale } from "i18n:astro";
 import Layout from "../layouts/Layout.astro";
+import Owl from "../components/Owl.astro";
 
 import alettaLogo from "../images/aletta.png";
 import alettaStill from "../images/aletta_still.jpg";
@@ -16,24 +17,23 @@ const applications = [application1, application2].map((img, idx) => ({
   title: t(`aletta:application-${idx + 1}`),
 }));
 
-import systemIntro from "../images/aletta/system/Aletta Systeem 1.jpg"
+import systemIntro from "../images/aletta/system/Aletta Systeem 1.jpg";
 
-import system1 from "../images/aletta/system/Aletta Systeem 2.jpg"
-import system2 from "../images/aletta/system/Aletta Systeem 2.png"
-import system3 from "../images/aletta/system/Aletta Systeem 3.jpg"
-import system4 from "../images/aletta/system/Aletta Systeem 4.png"
+import system1 from "../images/aletta/system/Aletta Systeem 2.jpg";
+import system2 from "../images/aletta/system/Aletta Systeem 2.png";
+import system3 from "../images/aletta/system/Aletta Systeem 3.jpg";
+import system4 from "../images/aletta/system/Aletta Systeem 4.png";
 
-const systems = [
-  system1,
-  system2,
-  system3,
-  system4
-].map((img, idx) => ({ img, title: t(`aletta:system-${idx+1}`)}));
+const systems = [system1, system2, system3, system4].map((img, idx) => ({
+  img,
+  title: t(`aletta:system-${idx + 1}`),
+}));
 
 import technicalDrawingsPreview from "../images/assunta/technical-drawings-preview.png";
 ---
 
 <Layout>
+  <Owl />
   <main class="container">
     <Image src={alettaLogo} alt="Aletta" height={70} />
     <h1>Aletta</h1>
@@ -45,12 +45,16 @@ import technicalDrawingsPreview from "../images/assunta/technical-drawings-previ
       </video>
       <p>{t("aletta:intro")}</p>
       <div class="grid">
-        {applications.map(({img, title}) => {
-          return <div>
-           <Image src={img} height={400} alt={title} />
-            <p>{title}</p>
-          </div>
-        })}
+        {
+          applications.map(({ img, title }) => {
+            return (
+              <div>
+                <Image src={img} height={400} alt={title} />
+                <p>{title}</p>
+              </div>
+            );
+          })
+        }
       </div>
     </section>
     <section>
@@ -60,12 +64,16 @@ import technicalDrawingsPreview from "../images/assunta/technical-drawings-previ
           <Image src={systemIntro} height={650} alt={t("aletta:systemIntro")} />
           <p>{t("aletta:systemIntro")}</p>
         </div>
-        {systems.map(({img, title}) => {
-          return <div>
-           <Image src={img} height={400} alt={title} />
-            <p>{title}</p>
-          </div>
-        })}
+        {
+          systems.map(({ img, title }) => {
+            return (
+              <div>
+                <Image src={img} height={400} alt={title} />
+                <p>{title}</p>
+              </div>
+            );
+          })
+        }
       </div>
     </section>
     <section>

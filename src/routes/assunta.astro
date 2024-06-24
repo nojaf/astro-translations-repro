@@ -2,6 +2,8 @@
 import { Image } from "astro:assets";
 import { t, getLocalePath, getLocale } from "i18n:astro";
 import Layout from "../layouts/Layout.astro";
+import Owl from "../components/Owl.astro";
+
 import assuntaLogo from "../images/assunta.png";
 import assuntaStill from "../images/assunta_still.jpg";
 import assuntaVideoMp4 from "../videos/assunta_web.mp4";
@@ -81,6 +83,7 @@ const downloads = allDownloads[current].map((img, idx) => ({
 ---
 
 <Layout>
+  <Owl />
   <main class="container">
     <Image src={assuntaLogo} alt="Assunta" height={70} />
     <h1>Assunta</h1>
